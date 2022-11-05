@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --open --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "lint": "eslint ./src/ --config=.eslintrc.json"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -14,6 +15,14 @@
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.4.1",
     "typescript": "^4.8.4",
