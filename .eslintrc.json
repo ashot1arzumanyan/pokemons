@@ -125,7 +125,6 @@
     "no-caller": "error",
     "no-case-declarations": "error",
     "no-confusing-arrow": "error",
-    "no-console": "error",
     "no-continue": "error",
     "no-delete-var": "error",
     "no-div-regex": "error",
@@ -328,6 +327,7 @@
       }
     ],
     "import/order": ["warn", {"alphabetize": {"order": "asc"}, "newlines-between": "always"}],
+    "no-console": "warn",
     "react/prop-types": "off",
     "import/no-named-as-default": "off",
     "sort-imports": "off",
@@ -340,6 +340,8 @@
     "max-params": "off",
     "no-extra-parens": "off",
     "no-ternary": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-unsafe-return": "off"
   }
 }
