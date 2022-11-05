@@ -1,31 +1,56 @@
-import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
+import styled from "styled-components";
+
+import useCurrentPage from "../hooks/useCurrentPage";
+import { SEARCH_PARAMS_PAGE } from "../util/constants/constants";
 
 interface ComponentProps {
   count: number;
   limit: number;
 }
 
+const Container = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template: 1fr / 100px min-content 100px;
+  padding: 16px;
+  margin-bottom: 40px;
+`;
+
+const Page = styled.span`
+  padding: 0 8px;
+`;
+
 const Pagination = ({ count, limit }: ComponentProps) => {
-  const pages = useMemo(() => {
-    const pagesCount = count / limit;
-    const pagesArray = [];
+  const { page } = useCurrentPage();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-    for (let i = 1; i <= pagesCount; i += 1) {
-      pagesArray.push(i);
-    }
+  const pagesCount = count / limit;
 
-    return pagesArray;
-  }, [count, limit]);
+  const hasPrevious = page > 1;
+  const hasNext = page < pagesCount;
+
+  const handlePageChange = (control: 1 | -1) => () => {
+    searchParams.set(SEARCH_PARAMS_PAGE, String(page + control));
+    setSearchParams(searchParams);
+  };
 
   return (
-    <div>
-      {pages.map((page) => (
-        <div key={page}>
-          {page}
-        </div>
-      ))}
-      {count}
-    </div>
+    <Container>
+      <button
+        disabled={!hasPrevious}
+        onClick={handlePageChange(-1)}
+      >
+        Previous
+      </button>
+      <Page>{page}</Page>
+      <button
+        disabled={!hasNext}
+        onClick={handlePageChange(1)}
+      >
+        Next
+      </button>
+    </Container>
   );
 };
 
