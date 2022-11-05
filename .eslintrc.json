@@ -29,7 +29,7 @@
     "node": true,
     "browser": true
   },
-  "ignorePatterns": ["node_modules"],
+  "ignorePatterns": ["node_modules", "webpack.config.js"],
   "rules": {
     "array-callback-return": "error",
     "constructor-super": "error",
@@ -91,7 +91,6 @@
     "accessor-pairs": "error",
     "arrow-body-style": ["error", "as-needed"],
     "block-scoped-var": "error",
-    "camelcase": "error",
     "capitalized-comments": "error",
     "class-methods-use-this": "error",
     "complexity": "error",
@@ -114,9 +113,7 @@
     "max-classes-per-file": "error",
     "max-depth": "error",
     "max-lines": "error",
-    "max-lines-per-function": "error",
     "max-nested-callbacks": "error",
-    "max-statements": "error",
     "multiline-comment-style": "error",
     "new-cap": "error",
     "no-alert": "error",
@@ -196,7 +193,6 @@
     "no-useless-rename": "error",
     "no-useless-return": "error",
     "no-var": "error",
-    "no-void": "error",
     "no-warning-comments": "error",
     "no-with": "error",
     "object-shorthand": "error",
@@ -251,7 +247,6 @@
     "lines-between-class-members": "error",
     "max-len": ["error", { "code": 120 }],
     "max-statements-per-line": "error",
-    "multiline-ternary": "error",
     "new-parens": "error",
     "newline-per-chained-call": "error",
     "no-mixed-spaces-and-tabs": "error",
@@ -263,7 +258,7 @@
     "nonblock-statement-body-position": "error",
     "object-curly-newline": "error",
     "object-curly-spacing": ["error", "always"],
-    "object-property-newline": "error",
+    "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
     "operator-linebreak": "error",
     "padded-blocks": ["error", "never"],
     "padding-line-between-statements": "error",
@@ -342,6 +337,11 @@
     "no-ternary": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/no-unsafe-return": "off"
+    "@typescript-eslint/no-unsafe-return": "off",
+    "multiline-ternary": "off",
+    "camelcase": "off",
+    "no-void": "off",
+    "max-statements": "off",
+    "max-lines-per-function": "off"
   }
 }
