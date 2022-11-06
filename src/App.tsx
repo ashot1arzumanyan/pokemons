@@ -11,7 +11,7 @@ const App = () => (
         element={<Home />}
       />
       <Route
-        path="/pokemon/:name"
+        path="/:name"
         element={<Pokemon />}
       />
     </Routes>

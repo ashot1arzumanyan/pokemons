@@ -39,7 +39,7 @@ const PokemonCard = ({ name }: ComponentProps) => {
   const pokemonImageUrl = pokemon ? pokemon.sprites.front_default : '';
 
   const handleCardClick = () => {
-    navigate(`/pokemon/${name}`);
+    navigate(`/${name}`);
   };
 
   return (
