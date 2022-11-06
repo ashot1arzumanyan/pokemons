@@ -24,16 +24,19 @@ const Search = () => {
   const { page } = useCurrentPage();
   const [search, setSearch] = useState(searchFromUrl);
   const [searchParams, setSearchParams] = useSearchParams();
-  const oldPage = useRef({ page });
+  const oldPage = useRef<{ page: number } | null>(null);
 
   useEffect(() => {
     if (search.length >= LIMIT_TO_START_SEARCH) {
-      searchParams.set(SearchParamsKeys.search, search);
+      searchParams.set(SearchParamsKeys.search, search.toLowerCase());
       searchParams.set(SearchParamsKeys.page, '1');
-      oldPage.current.page = page;
+      oldPage.current = { page };
     } else {
+      if (oldPage.current && (!page || page !== oldPage.current.page)) {
+        searchParams.set(SearchParamsKeys.page, String(oldPage.current.page));
+        oldPage.current = null;
+      }
       searchParams.delete(SearchParamsKeys.search);
-      searchParams.set(SearchParamsKeys.page, String(oldPage.current.page));
     }
     setSearchParams(searchParams);
   // eslint-disable-next-line react-hooks/exhaustive-deps
