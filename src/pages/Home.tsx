@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Pagination from "../components/Pagination";
 import PokemonCard from "../components/PokemonCard";
+import useCurrentPage from "../hooks/useCurrentPage";
 import { PokemonsResponse } from "../typings/pokemon";
 import PokemonApi from "../util/apis/PokemonApi";
 import { LIMIT_PER_PAGE } from "../util/constants/constants";
@@ -15,11 +16,11 @@ const PokemonsList = styled.div`
 
 const Home = () => {
   const [pokemons, setPokemons] = useState<PokemonsResponse>(null);
-  // Const [page, setPage] = useState(DEFAULT_PAGE);
+  const { page } = useCurrentPage();
 
   useEffect(() => {
     const getPokemons = async () => {
-      const data = await PokemonApi.getPokemons();
+      const data = await PokemonApi.getPokemons(page);
       if (data) {
         setPokemons(data);
       }
@@ -27,7 +28,7 @@ const Home = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getPokemons();
-  }, []);
+  }, [page]);
 
   if (!pokemons) {
     return null;
