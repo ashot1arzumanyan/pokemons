@@ -9,3 +9,13 @@ yarn install
 ```
 yarn start
 ```
+
+### Testing
+```
+yarn cy
+```
+
+### Code linting
+```
+yarn lint
+```
