@@ -5,6 +5,8 @@ import styled from "styled-components";
 import PokemonCharacter from "../components/PokemonCharacter";
 import PokemonCharactersList from "../components/PokemonCharactersList";
 import PokemonMoves from "../components/PokemonMoves";
+import PokemonSpeciesList from "../components/PokemonSpeciesList";
+import PokemonTypesList from "../components/PokemonTypesList";
 import usePokemonByName from "../hooks/usePokemonByName";
 import { PokemonFullData } from "../typings/pokemon";
 import PokemonApi from "../util/apis/PokemonApi";
@@ -28,13 +30,15 @@ const Pokemon = () => {
 
   useEffect(() => {
     if (pokemon) {
-      const response = Promise.all([PokemonApi.getPokemonSpecies(name)]);
-      void response.then(([species]) => {
-        const newData = {} as PokemonFullData;
-
-        if (species) {
-          newData.species = species;
-        }
+      const response = Promise.all([
+        PokemonApi.getPokemonSpecies(pokemon.species.name),
+        PokemonApi.getPokemonTypes(pokemon.types[0].type.name),
+      ]);
+      void response.then(([species, types]) => {
+        const newData = {
+          species,
+          types,
+        } as PokemonFullData;
 
         setData(newData);
       });
@@ -46,16 +50,10 @@ const Pokemon = () => {
     return null;
   }
 
-  const { species } = data;
-
-  const { base_happiness, capture_rate } = species;
-  const species1 = { base_happiness, capture_rate };
+  const { species, types } = data;
 
   const [{ base_stat, effort }] = pokemon.stats;
   const stats = { base_stat, effort };
-
-  const [{ slot }] = pokemon.types;
-  const types = { slot };
 
   return (
     <Container>
@@ -71,17 +69,15 @@ const Pokemon = () => {
         value={pokemon.weight}
       />
       <CharactersContainer>
-        <PokemonCharactersList
-          label="Species"
-          characters={species1}
+        <PokemonSpeciesList
+          species={species}
         />
         <PokemonCharactersList
           label="Stats"
           characters={stats}
         />
-        <PokemonCharactersList
-          label="Types"
-          characters={types}
+        <PokemonTypesList
+          types={types}
         />
       </CharactersContainer>
       <PokemonMoves moves={pokemon.moves} />

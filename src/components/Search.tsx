@@ -1,7 +1,8 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
+import useCurrentPage from "../hooks/useCurrentPage";
 import useSearch from "../hooks/useSearch";
 import { LIMIT_TO_START_SEARCH, SearchParamsKeys } from "../util/constants/constants";
 
@@ -20,14 +21,19 @@ const StyledSearchInput = styled.input`
 
 const Search = () => {
   const { search: searchFromUrl } = useSearch();
+  const { page } = useCurrentPage();
   const [search, setSearch] = useState(searchFromUrl);
   const [searchParams, setSearchParams] = useSearchParams();
+  const oldPage = useRef({ page });
 
   useEffect(() => {
     if (search.length >= LIMIT_TO_START_SEARCH) {
       searchParams.set(SearchParamsKeys.search, search);
+      searchParams.set(SearchParamsKeys.page, '1');
+      oldPage.current.page = page;
     } else {
       searchParams.delete(SearchParamsKeys.search);
+      searchParams.set(SearchParamsKeys.page, String(oldPage.current.page));
     }
     setSearchParams(searchParams);
   // eslint-disable-next-line react-hooks/exhaustive-deps
