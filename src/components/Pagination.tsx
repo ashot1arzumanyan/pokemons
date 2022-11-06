@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import useCurrentPage from "../hooks/useCurrentPage";
-import { SEARCH_PARAMS_PAGE } from "../util/constants/constants";
+import { SearchParamsKeys } from "../util/constants/constants";
 
 interface ComponentProps {
   count: number;
@@ -31,7 +31,7 @@ const Pagination = ({ count, limit }: ComponentProps) => {
   const hasNext = page < pagesCount;
 
   const handlePageChange = (control: 1 | -1) => () => {
-    searchParams.set(SEARCH_PARAMS_PAGE, String(page + control));
+    searchParams.set(SearchParamsKeys.page, String(page + control));
     setSearchParams(searchParams);
   };
 

@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import Pagination from "../components/Pagination";
 import PokemonCard from "../components/PokemonCard";
+import Search from "../components/Search";
 import useCurrentPage from "../hooks/useCurrentPage";
+import useSearch from "../hooks/useSearch";
 import { PokemonsResponse } from "../typings/pokemon";
-import PokemonApi from "../util/apis/PokemonApi";
 import { LIMIT_PER_PAGE } from "../util/constants/constants";
+import getPokemonsService from "../util/service/getPokemonsService";
 
 const PokemonsList = styled.div`
   display: flex;
@@ -17,10 +19,11 @@ const PokemonsList = styled.div`
 const Home = () => {
   const [pokemons, setPokemons] = useState<PokemonsResponse>(null);
   const { page } = useCurrentPage();
+  const { search } = useSearch();
 
   useEffect(() => {
     const getPokemons = async () => {
-      const data = await PokemonApi.getPokemons(page);
+      const data = await getPokemonsService(page, search);
       if (data) {
         setPokemons(data);
       }
@@ -28,7 +31,7 @@ const Home = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getPokemons();
-  }, [page]);
+  }, [page, search]);
 
   if (!pokemons) {
     return null;
@@ -36,6 +39,7 @@ const Home = () => {
 
   return (
     <div>
+      <Search />
       <PokemonsList>
         {pokemons.results.map(({ name, url }) => (
           <PokemonCard

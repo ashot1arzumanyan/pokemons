@@ -2,12 +2,12 @@ import { useSearchParams } from "react-router-dom";
 
 import { SearchParamsKeys } from "../util/constants/constants";
 
-const useCurrentPage = () => {
+const useSearch = () => {
   const [searchParams] = useSearchParams();
 
-  const page = Number(searchParams.get(SearchParamsKeys.page)) || 1;
+  const search = searchParams.get(SearchParamsKeys.search) || '';
 
-  return { page };
+  return { search };
 };
 
-export default useCurrentPage;
+export default useSearch;

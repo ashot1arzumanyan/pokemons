@@ -82,7 +82,6 @@
     "no-unsafe-negation": "error",
     "no-unsafe-optional-chaining": "error",
     "no-unused-private-class-members": "error",
-    "no-unused-vars": "error",
     "no-use-before-define": "error",
     "no-useless-backreference": "error",
     "require-atomic-updates": "error",
@@ -175,7 +174,6 @@
     "no-return-await": "error",
     "no-script-url": "error",
     "no-sequences": "error",
-    "no-shadow": "error",
     "no-shadow-restricted-names": "error",
     "no-throw-literal": "error",
     "no-undef-init": "error",
@@ -313,6 +311,8 @@
     "react/no-typos": "error",
     "react/no-unsafe": "error",
     "react/self-closing-comp": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-restricted-imports": [
       "error",
       {
